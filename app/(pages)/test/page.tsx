@@ -1,3 +1,4 @@
+/*
 'use client';
 import React, { useEffect, useState } from 'react';
 import SeatSelection from "@/components/test/seat-selection";
@@ -41,3 +42,4 @@ export default function Page(){
     );
 };
 
+*/
