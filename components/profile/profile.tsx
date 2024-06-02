@@ -13,6 +13,7 @@ import getSession from "@/actions/auth/session";
 import getUserBySession from "@/actions/user/get-by-session";
 import logout from "@/actions/auth/logout";
 import getAdditionalData from "@/actions/user/get-additional-data";
+import {AdditionalUserData, User} from "@/lib/data";
 
 export default function Profile() {
     const searchParams = useSearchParams()
