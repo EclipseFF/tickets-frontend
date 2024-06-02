@@ -21,6 +21,7 @@ export interface EventInterface {
     rating?: number;
     createdAt?: Date;
     updatedAt?: Date;
+    duration?: string
 };
 
 export interface EventReq {

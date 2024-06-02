@@ -4,7 +4,7 @@ import IndexBanner from "@/components/index-banner";
 
 export default function IndexSlider() {
     return (
-        <div className="w-[1130px] pb-6">
+        <div className="lg:w-[1130px] pb-6">
             <Carousel>
                 <CarouselContent>
                     <CarouselItem>
@@ -17,8 +17,8 @@ export default function IndexSlider() {
                         <IndexBanner />
                     </CarouselItem>
                 </CarouselContent>
-                <CarouselPrevious/>
-                <CarouselNext/>
+                <CarouselPrevious className="hidden lg:inline-flex" />
+                <CarouselNext className="hidden lg:inline-flex" />
             </Carousel>
         </div>
     );

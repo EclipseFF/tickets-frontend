@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={manrope.className + " grid grid-cols-1 justify-items-center text-primaryText"}>
+    <html lang="ru" style={{scrollBehavior: "smooth"}}>
+      <body className={manrope.className + " lg:grid grid-cols-1 justify-items-center text-primaryText"}>
             {children}
       </body>
     </html>

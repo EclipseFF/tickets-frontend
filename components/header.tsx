@@ -14,7 +14,8 @@ import Link from "next/link";
 import getSession from "@/actions/auth/session";
 import getUserBySession from "@/actions/user/get-by-session";
 import getAdditionalData from "@/actions/user/get-additional-data";
-import getEventTypes from "@/actions/event/getTypes";
+import {AdditionalUserData, User} from "@/lib/data";
+
 
 export default function Header() {
     const [city, setCity] = useState("Астана");
@@ -41,7 +42,7 @@ export default function Header() {
 
     }, [])
     return (
-        <header className="flex items-center justify-between gap-4 h-[70px] min-w-[1152px]">
+        <header className="flex items-center justify-between gap-4 lg:h-[70px] lg:min-w-[1152px]">
             <div className="flex items-center">
                 <Image src="/logo.svg" alt="logo" width={99} height={74} />
                 <DropdownMenu>

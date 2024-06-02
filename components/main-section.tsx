@@ -1,10 +1,6 @@
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
-import CinemaList from "@/components/lists/cinema-list";
-import TheaterList from "@/components/lists/theater-list";
-import ConcertList from "@/components/lists/concert-list";
-import OtherList from "@/components/lists/other-list";
-import {useState} from "react";
+import IndexLists from "@/components/index-lists";
 
 export default function MainSection() {
 
@@ -26,18 +22,7 @@ export default function MainSection() {
                     </Button>
                 </div>
             </div>
-            <div>
-                <CinemaList/>
-            </div>
-            <div>
-                <ConcertList/>
-            </div>
-            <div>
-                <TheaterList/>
-            </div>
-            <div>
-                <OtherList/>
-            </div>
+            <IndexLists />
         </div>
     )
 }

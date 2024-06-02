@@ -8,6 +8,7 @@ import {EventInterface, EventType} from "@/lib/data";
 import getEventByTypePage from "@/actions/event/get-type-page";
 import {useSearchParams} from "next/navigation";
 import EventCard from "@/components/event-card";
+import Link from "next/link";
 
 
 export default function FilteredContent({id, name, translatedName}: EventType) {
@@ -39,11 +40,15 @@ export default function FilteredContent({id, name, translatedName}: EventType) {
                 </div>
             </div>
             {isFilterOpened && "1asd"}
-            <div className="grid grid-cols-1 lg:grid-cols-7 w-4/5 mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-7 mx-auto">
                 {
                     content && content.length > 0 && typeof content !== "string" &&(
                         content.map((e) => (
-                            <EventCard key={e.id} event={e}/>
+                            <div key={e.id}>
+                                <Link href={`/event/${e.id}`}>
+                                    <EventCard event={e}/>
+                                </Link>
+                            </div>
                         ))
                     )
 
