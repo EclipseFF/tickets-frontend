@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import getEventsPage from "@/actions/event/get-page";
 import EventCardExpanded from "@/components/event-card-expanded";
+import {EventInterface} from "@/lib/data";
 
 type Props = {
     page?: number
