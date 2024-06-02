@@ -27,32 +27,28 @@ const SeatSelection: React.FC<SeatSelectionProps> = ({ sectors }) => {
     };
 
     return (
-        <div>
-            {(typeof window !== undefined) ? (
-                <Stage width={window.innerWidth} height={window.innerHeight}>
-                    <Layer>
-                        {sectors.map((sector) =>
-                            sector.layout.map((row, rowIndex) =>
-                                row.map((seat, seatIndex) => (
-                                    <Rect
-                                        key={`${rowIndex}-${seatIndex}`}
-                                        x={seat.x}
-                                        y={seat.y}
-                                        width={20}
-                                        height={20}
-                                        fill={seat.is_available ? 'green' : 'red'}
-                                        stroke={'black'}
-                                        strokeWidth={1}
-                                        cornerRadius={3}
-                                        onClick={() => handleSeatClick(seat)}
-                                    />
-                                ))
-                            )
-                        )}
-                    </Layer>
-                </Stage>
-            ) : null}
-        </div>
+        <Stage width={800} height={800}>
+            <Layer>
+                {sectors.map((sector) =>
+                    sector.layout.map((row, rowIndex) =>
+                        row.map((seat, seatIndex) => (
+                            <Rect
+                                key={`${rowIndex}-${seatIndex}`}
+                                x={seat.x}
+                                y={seat.y}
+                                width={20}
+                                height={20}
+                                fill={seat.is_available ? 'green' : 'red'}
+                                stroke={'black'}
+                                strokeWidth={1}
+                                cornerRadius={3}
+                                onClick={() => handleSeatClick(seat)}
+                            />
+                        ))
+                    )
+                )}
+            </Layer>
+        </Stage>
     );
 };
 
