@@ -2,8 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
 import {others, theaters} from "@/lib/mock-data";
-import CinemaCard from "@/components/cards/cinema-card";
-import TheaterCard from "@/components/cards/theater-card";
 import OtherCard from "@/components/cards/other-card";
 
 export default function OtherList() {

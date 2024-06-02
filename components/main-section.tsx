@@ -1,12 +1,13 @@
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
 import CinemaList from "@/components/lists/cinema-list";
 import TheaterList from "@/components/lists/theater-list";
 import ConcertList from "@/components/lists/concert-list";
 import OtherList from "@/components/lists/other-list";
+import {useState} from "react";
 
 export default function MainSection() {
+
     return (
         <div className="lg:w-[1152px]">
             <div className="grid grid-cols-1 lg:grid-cols-3 w-4/5 mx-auto">

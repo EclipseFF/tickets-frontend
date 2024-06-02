@@ -8,11 +8,38 @@ import {Input} from "@/components/ui/input";import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import LoginRegister from "@/components/auth/login-register";
+import Link from "next/link";
+import getSession from "@/actions/auth/session";
+import getUserBySession from "@/actions/user/get-by-session";
+import getAdditionalData from "@/actions/user/get-additional-data";
+import getEventTypes from "@/actions/event/getTypes";
 
 export default function Header() {
     const [city, setCity] = useState("Астана");
     const [lang, setLang] = useState("Рус");
+    const [user, setUser] = useState<User>();
+    const [additionalData, setAdditionalData] = useState<AdditionalUserData>();
+    const [showLogin, setShowLogin] = useState(false);
+    const [session, setSession] = useState<string>();
+
+    useEffect(() => {
+        getSession().then(session => {
+            if (session) {
+                setSession(session)
+                getUserBySession(session).then(u => {
+                    if (u) {
+                        setUser(u)
+                        getAdditionalData(u.id).then(data => {
+                            setAdditionalData(data)
+                        })
+                    }
+                })
+            }
+        })
+
+    }, [])
     return (
         <header className="flex items-center justify-between gap-4 h-[70px] min-w-[1152px]">
             <div className="flex items-center">
@@ -53,7 +80,16 @@ export default function Header() {
                         </DropdownMenuRadioGroup>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <Button variant="secondary"><span className="font-bold text-base">Войти</span></Button>
+                {(user && session) ? (
+                    <Link href={'/profile'}>
+                        <Button variant="secondary"><span className="font-bold text-base">{additionalData?.surname} { additionalData?.name}</span></Button>
+                    </Link>
+                ) :
+                    <Link href={'/auth'}>
+                        <Button variant="green"><span className="font-bold text-base">Войти</span></Button>
+                    </Link>
+                }
+
             </div>
         </header>
     )

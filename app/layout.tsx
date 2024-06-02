@@ -22,10 +22,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={manrope.className + " grid grid-cols-1 justify-items-center text-primaryText"}>
-        <Header />
-          <Navbar />
             {children}
-        <Footer />
       </body>
     </html>
   );
