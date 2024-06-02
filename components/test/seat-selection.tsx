@@ -25,30 +25,32 @@ const SeatSelection: React.FC<SeatSelectionProps> = ({ sectors }) => {
     const handleSeatClick = (seat: Seat) => {
         setSelectedSeat(seat);
     };
-    console.log(sectors)
+
     return (
-        <Stage width={window.innerWidth} height={window.innerHeight}>
-            <Layer>
-                {sectors.map((sector) =>
-                    sector.layout.map((row, rowIndex) =>
-                        row.map((seat, seatIndex) => (
-                            <Rect
-                                key={`${rowIndex}-${seatIndex}`}
-                                x={seat.x}
-                                y={seat.y}
-                                width={20}
-                                height={20}
-                                fill={seat.is_available ? 'green' : 'red'}
-                                stroke={'black'}
-                                strokeWidth={1}
-                                cornerRadius={3}
-                                onClick={() => handleSeatClick(seat)}
-                            />
-                        ))
-                    )
-                )}
-            </Layer>
-        </Stage>
+        {typeof window !== undefined ? (
+            <Stage width={window.innerWidth} height={window.innerHeight}>
+                <Layer>
+                    {sectors.map((sector) =>
+                        sector.layout.map((row, rowIndex) =>
+                            row.map((seat, seatIndex) => (
+                                <Rect
+                                    key={`${rowIndex}-${seatIndex}`}
+                                    x={seat.x}
+                                    y={seat.y}
+                                    width={20}
+                                    height={20}
+                                    fill={seat.is_available ? 'green' : 'red'}
+                                    stroke={'black'}
+                                    strokeWidth={1}
+                                    cornerRadius={3}
+                                    onClick={() => handleSeatClick(seat)}
+                                />
+                            ))
+                        )
+                    )}
+                </Layer>
+            </Stage>
+        ) : null}
     );
 };
 

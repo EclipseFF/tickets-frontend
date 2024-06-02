@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProfileMenu from "@/components/profile/profile-menu";
 import Profile from "@/components/profile/profile";
+import {Suspense} from "react";
 
 export default function Page() {
     return (
@@ -15,7 +16,9 @@ export default function Page() {
                     <p className="text-lg font-bold">Профиль</p>
                 </Link>
             </div>
-            <Profile />
+            <Suspense fallback={<div>Загрузка...</div>}>
+                <Profile />
+            </Suspense>
         </div>
     )
 }
