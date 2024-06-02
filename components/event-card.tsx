@@ -3,7 +3,7 @@ import {EventImages, EventInterface} from "@/lib/data";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import getEventImages from "@/actions/event/get-images";
-import {url} from "@/lib/api";
+import {staticUrl, url} from "@/lib/api";
 
 type Props = {
     event: EventInterface
@@ -42,7 +42,7 @@ export default function EventCard(props: Props) {
                     {props.event.ageRestriction + "+"}
                 </div>
             )}
-            <Image src={url + '/api/v1/static/' + props.event.id + '/' + images?.main_images[0] || '/temp/cinema-poster.png'} alt={"Постер"} width={147} height={225} className="rounded-xl"/>
+            <Image src={staticUrl + '/' + props.event.id + '/' + images?.main_images[0] || '/temp/cinema-poster.png'} alt={"Постер"} width={147} height={225} className="rounded-xl"/>
 
             {props.event.title && (
                 <p className="font-extrabold line-clamp-2">

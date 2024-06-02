@@ -3,9 +3,10 @@ import {Card, CardContent} from "@/components/ui/card";
 import {useEffect, useState} from "react";
 import getEventImages from "@/actions/event/get-images";
 import Image from "next/image";
-import {url} from "@/lib/api";
+import {staticUrl, url} from "@/lib/api";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {EventImages, EventInterface} from "@/lib/data";
 
 type Props = {
     Event: EventInterface
@@ -31,7 +32,7 @@ export default function EventCardExpanded({Event}: Props) {
                                             <div className="p-1">
                                                 <Card>
                                                     <CardContent className="flex aspect-ratio-3/4 items-center justify-center p-6">
-                                                        <Image src={`${url}/api/v1/static/${Event.id}/${poster}`} alt={'Постеры'} width={400} height={200}/>
+                                                        <Image src={`${staticUrl}/${Event.id}/${poster}`} alt={'Постеры'} width={400} height={200}/>
                                                     </CardContent>
                                                 </Card>
                                             </div>

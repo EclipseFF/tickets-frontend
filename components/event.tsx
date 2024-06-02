@@ -6,7 +6,7 @@ import getEventById from "@/actions/event/get-by-id";
 import Image from "next/image";
 import getEventImages from "@/actions/event/get-images";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
-import {url} from "@/lib/api";
+import {staticUrl, url} from "@/lib/api";
 
 export default function Event({id}: {id: number}) {
     const [event, setEvent] = useState<EventInterface>()
@@ -27,7 +27,7 @@ export default function Event({id}: {id: number}) {
                     <CarouselContent>
                         {image?.main_images.map((img) => (
                             <CarouselItem key={img}>
-                                <Image src={`${url}/api/v1/static/${id}/${img}`} alt={event?.title || ''} width={400}
+                                <Image src={`${staticUrl}/${id}/${img}`} alt={event?.title || ''} width={400}
                                            height={200}/>
                             </CarouselItem>
                         ))}
