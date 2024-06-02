@@ -9,6 +9,7 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import logout from "@/actions/auth/logout";
 import Image from "next/image";
+import {User} from "@/lib/data";
 
 interface Props {
     option: string

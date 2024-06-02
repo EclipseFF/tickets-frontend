@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import getAdditionalData from "@/actions/user/get-additional-data";
 import logout from "@/actions/auth/logout";
 import {useRouter} from "next/navigation";
+import {AdditionalUserData} from "@/lib/data";
 
 type Props = {
     id: number
