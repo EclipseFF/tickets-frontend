@@ -164,7 +164,7 @@ export default function PersonalData(props: Props) {
                         name="birthday"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Дата рождения: {props.additionalData?.birthdate && formatDateToRussian(props.additionalData?.birthdate.toString())}</FormLabel>
+                                <FormLabel>Дата рождения: {props.additionalData?.birthdate && props.additionalData?.birthdate.toString() && formatDateToRussian(props.additionalData?.birthdate.toString())}</FormLabel>
                                 <FormControl>
                                     <Input type={'date'} {...field}
                                            value={
