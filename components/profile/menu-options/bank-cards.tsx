@@ -1,7 +1,10 @@
 export default function BankCards() {
     return (
         <div>
-            Банковские карты
+            <p>
+                Банковские карты
+            </p>
+
         </div>
     )
 }

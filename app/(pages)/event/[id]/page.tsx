@@ -101,7 +101,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     </div>
                 </div>
                 <div className="col-span-1 pl-3">
-                    {event?.venues && (
+                    {event?.venues && event.venues.length > 0 && (
                         <div className="max-h-[120px]">
                             <p className="text-base font-normal text-secondaryText pt-2">
                                 Места проведения
@@ -146,7 +146,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     )}
                 </div>
                 <div className="col-span-1">
-                    {event?.genres && (
+                    {event?.genres && event.genres.length > 0 && (
                         <div className="max-h-[120px]">
                             <p className="text-base font-normal text-secondaryText pt-2">
                                 Жанр
@@ -163,7 +163,7 @@ export default function Page({ params }: { params: { id: string } }) {
                         </div>
                     )}
 
-                    {event?.ageRestriction && (
+                    {(event?.ageRestriction && event.ageRestriction > -1 )&& (
                         <div>
                             <p className="text-base font-normal text-secondaryText pt-2 ">
                                 Возрастное ограничение

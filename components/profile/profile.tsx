@@ -19,7 +19,7 @@ export default function Profile() {
     const searchParams = useSearchParams()
     const option = searchParams.get('option') || 'data'
     const [user, setUser] = useState<User>({} as User)
-    const [additionalData, setAdditionalData] = useState<AdditionalUserData>()
+    const [additionalData, setAdditionalData] = useState<AdditionalUserData>({} as AdditionalUserData)
     useEffect(() => {
         getSession().then(session => {
             if (session) {
@@ -27,7 +27,14 @@ export default function Profile() {
                     if (u) {
                         setUser(u)
                         getAdditionalData(u.id).then(data => {
-                            setAdditionalData(data)
+                            const d: AdditionalUserData = {
+                                user_id: data.user_id,
+                                surname: data.surname,
+                                name: data.name,
+                                patronymic: data.patronymic,
+                                birthdate: new Date(data.date_of_birth)
+                            }
+                            setAdditionalData(d)
                         })
                     } else {
                         logout()
@@ -37,13 +44,13 @@ export default function Profile() {
         })
     }, [])
     return (
-        <div className="grid grid-cols-10 ">
+        <div className="grid grid-cols-10 py-3">
             <div className="col-span-3">
                 <ProfileMenu option={option} name={additionalData?.name} surname={additionalData?.surname}/>
             </div>
             <div className="col-span-7">
+                {option === 'data' && <PersonalData user={user} additionalData={additionalData} />}
                 {option === 'tickets' && <Tickets/>}
-                {option === 'data' && <PersonalData id={user.id}/>}
                 {option === 'cards' && <BankCards/>}
                 {option === 'return' && <TicketsReturn/>}
                 {option === 'support' && <Support/>}

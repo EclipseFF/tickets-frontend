@@ -13,13 +13,12 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import {login} from "@/actions/admin/login";
-import {register} from "@/actions/auth/register";
+import {login} from "@/actions/auth/login";
 import {useRouter} from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().min(2, { message: "Введите крректную почту" }),
-    password: z.string().min(2, { message: "Введите крректный пароль" }),
+    password: z.string().min(2, { message: "Введите корректный пароль" }),
 })
 
 export default function LoginForm() {

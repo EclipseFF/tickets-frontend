@@ -16,7 +16,7 @@ export default function Page() {
                     <p className="text-lg font-bold">Профиль</p>
                 </Link>
             </div>
-            <Suspense fallback={<div>Загрузка...</div>}>
+            <Suspense fallback={<div className="text-primaryText">Загрузка...</div>}>
                 <Profile />
             </Suspense>
         </div>

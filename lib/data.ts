@@ -39,6 +39,7 @@ export interface EventReq {
     rating?: number;
     createdAt?: Date;
     updatedAt?: Date;
+    duration?: string
 };
 
 export interface User {
@@ -53,10 +54,6 @@ export interface AdditionalUserData {
     name?: string;
     patronymic?: string;
     birthdate?: Date;
-    gender?: string;
-    photo?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
 }
 
 export interface EventType {

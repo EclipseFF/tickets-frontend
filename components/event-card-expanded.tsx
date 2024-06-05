@@ -51,7 +51,6 @@ export default function EventCardExpanded({Event}: Props) {
                     <div className="col-span-3">
                         <h1>{Event.title}</h1>
                         <p>{Event.briefDesc}</p>
-                        <p>{Event.description}</p>
                         <Link href={'/admin-panel/events/' + Event.id}>
                             <Button type="button" variant="green">Редактровать/Удалить</Button>
                         </Link>

@@ -49,9 +49,12 @@ export default function CreateEventForm() {
             price: priceParam,
             ageRestriction: age,
             rating: -1,
+            duration: duration
         }
+        const text = JSON.stringify(editor?.getJSON())
 
-        const res = createEvent(temp, editor?.getJSON())
+        console.log(text)
+        const res = createEvent(temp, text)
         res.then((data) => {
             if (data !== "error") {
                 console.log(data)
@@ -191,6 +194,7 @@ export default function CreateEventForm() {
     const [price, setPrice] = useState<string>("")
     const [ageRestriction, setAgeRestriction] = useState<string>("")
     const [link, setLink] = useState<string>("")
+    const [duration, setDuration] = useState<string>("")
 
     function handleLinkAdd() {
         editor?.chain().focus().extendMarkRange('link').setLink({href: link}).run()
@@ -255,43 +259,46 @@ export default function CreateEventForm() {
             <div className="pt-14">
                 <p className="text-lg font-semibold">Введите полное описание</p>
                 <p className="text-lg">
-                    Вы можете выделить текст, чтобы редактировать его. Чтобы создать заголовок или список, начнине новую строку.
+                    Вы можете выделить текст, чтобы редактировать его. Чтобы создать заголовок или список, начнине новую
+                    строку.
 
                 </p>
                 <p className="text-lg pb-6">
-                    Чтобы начать новый абзац, нажмите Enter. Для того, чтобы продолжать текст в том же абзаце, но с новой строки, нажмите Shift+Enter.
+                    Чтобы начать новый абзац, нажмите Enter. Для того, чтобы продолжать текст в том же абзаце, но с
+                    новой строки, нажмите Shift+Enter.
                 </p>
-                {editor && <BubbleMenu editor={editor} tippyOptions={{duration: 100}} className="bg-white text-white rounded">
-                    <button
-                        onClick={() => editor.chain().focus().toggleBold().run()}
-                        className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
-                    >
-                        Жирный
-                    </button>
-                    <button
-                        onClick={() => editor.chain().focus().toggleItalic().run()}
-                        className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
-                    >
-                        Курсив
-                    </button>
-                    <button
-                        onClick={() => editor.chain().focus().toggleStrike().run()}
-                        className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
-                    >
-                        Перечёркнутый
-                    </button>
+                {editor &&
+                    <BubbleMenu editor={editor} tippyOptions={{duration: 100}} className="bg-white text-white rounded">
+                        <button
+                            onClick={() => editor.chain().focus().toggleBold().run()}
+                            className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
+                        >
+                            Жирный
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().toggleItalic().run()}
+                            className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
+                        >
+                            Курсив
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().toggleStrike().run()}
+                            className={editor.isActive('bold') ? 'is-active text-black p-1 m-1 bg-primaryGreen rounded' : '' + ' p-1 m-1 bg-primaryGreen rounded'}
+                        >
+                            Перечёркнутый
+                        </button>
 
-                    <Popover>
-                        <PopoverTrigger className="p-1 m-1 bg-primaryGreen rounded">Добавить ссылку</PopoverTrigger>
-                        <PopoverContent>
+                        <Popover>
+                            <PopoverTrigger className="p-1 m-1 bg-primaryGreen rounded">Добавить ссылку</PopoverTrigger>
+                            <PopoverContent>
 
-                            <Textarea placeholder="Ссылка" onInput={(e) =>
-                                // @ts-ignore
-                                setLink(e.target.value)}/>
-                            <Button className="m-2" onClick={handleLinkAdd}>Добавить</Button>
-                        </PopoverContent>
-                    </Popover>
-                </BubbleMenu>}
+                                <Textarea placeholder="Ссылка" onInput={(e) =>
+                                    // @ts-ignore
+                                    setLink(e.target.value)}/>
+                                <Button className="m-2" onClick={handleLinkAdd}>Добавить</Button>
+                            </PopoverContent>
+                        </Popover>
+                    </BubbleMenu>}
 
                 {editor && <FloatingMenu editor={editor} tippyOptions={{duration: 100}}>
                     <button
@@ -337,9 +344,10 @@ export default function CreateEventForm() {
                         <p className="text-lg font-semibold">
                             Добавить новый жанр
                         </p>
-                        <input type="text" id="genrecreate"  className="p-2 border rounded m-2" placeholder="Трагедия" onInput={(e) => setNewGenre(
-                            // @ts-ignore
-                            e.target.value)}/>
+                        <input type="text" id="genrecreate" className="p-2 border rounded m-2" placeholder="Трагедия"
+                               onInput={(e) => setNewGenre(
+                                   // @ts-ignore
+                                   e.target.value)}/>
                         <Button variant={'green'} className="w-1/5" onClick={() => handleGenreCreate()}>
                             Добавить
                         </Button>
@@ -379,7 +387,7 @@ export default function CreateEventForm() {
                         e.target.value)}
                               className="w-full border border-black rounded p-2"/>
                     <div className="pt-2">
-                        <Button variant={'green'}  onClick={() => handleVenueCreate()}>
+                        <Button variant={'green'} onClick={() => handleVenueCreate()}>
                             Добавить
                         </Button>
                     </div>
@@ -444,6 +452,17 @@ export default function CreateEventForm() {
                     </Popover>
                 </div>
             </div>
+
+            <div className="border p-2 mt-5">
+                <p className="text-lg font-semibold">Укажите продолжительность</p>
+                <input type="text" className="w-full border border-black rounded p-2" placeholder="3 часа" onInput={(e) =>
+                    // @ts-ignore
+                    setDuration(e.target.value)}/>
+                <p className="text-lg font-semibold">
+                    Например &ldquo;2 часа 30 минут&ldquo; или &ldquo;2 ч 30 мин&ldquo;
+                </p>
+            </div>
+
             <div className="border p-2 mt-5">
                 <p className="text-lg font-semibold">Укажите стоимость билета, от</p>
                 <input type="text" className="w-full border border-black rounded p-2" placeholder="1000" onInput={(e) =>
@@ -459,7 +478,7 @@ export default function CreateEventForm() {
                     // @ts-ignore
                     setAgeRestriction(e.target.value)}/>
             </div>
-            <Button onClick={() => handleEventCreate()}>
+            <Button onClick={(e) => handleEventCreate()}>
                 Создать
             </Button>
         </div>

@@ -21,8 +21,6 @@ export default function Header() {
     const [city, setCity] = useState("Астана");
     const [lang, setLang] = useState("Рус");
     const [user, setUser] = useState<User>();
-    const [additionalData, setAdditionalData] = useState<AdditionalUserData>();
-    const [showLogin, setShowLogin] = useState(false);
     const [session, setSession] = useState<string>();
 
     useEffect(() => {
@@ -32,9 +30,6 @@ export default function Header() {
                 getUserBySession(session).then(u => {
                     if (u) {
                         setUser(u)
-                        getAdditionalData(u.id).then(data => {
-                            setAdditionalData(data)
-                        })
                     }
                 })
             }
@@ -83,7 +78,7 @@ export default function Header() {
                 </DropdownMenu>
                 {(user && session) ? (
                     <Link href={'/profile'}>
-                        <Button variant="secondary"><span className="font-bold text-base">{additionalData?.surname} { additionalData?.name}</span></Button>
+                        <Button variant="secondary"><span className="font-bold text-base">Профиль</span></Button>
                     </Link>
                 ) :
                     <Link href={'/auth'}>

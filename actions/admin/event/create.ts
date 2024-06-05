@@ -4,10 +4,12 @@ import {url} from "@/lib/api";
 import {EventReq} from "@/lib/data";
 import {JSONContent} from "@tiptap/core";
 
-export default async function createEvent(event: EventReq, description?: JSONContent) {
+export default async function createEvent(event: EventReq, description?: string) {
     try {
-        event.description = description
-        console.log(event.briefDesc)
+        if (!description) {
+            description = JSON.stringify({})
+        }
+        event.description = JSON.parse(description)
         const res = await fetch(`${url}/api/v1/event/create`, {
             method: 'POST',
             headers: {

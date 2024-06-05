@@ -2,10 +2,15 @@ import Navbar from "@/components/admin/navbar";
 import EventsList from "@/components/admin/events-list";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import getSession from "@/actions/admin/get-session";
+import {redirect} from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
 
-
+    const session = await getSession()
+    if (!session) {
+        redirect('/admin-panel')
+    }
 
     return (
         <div>
