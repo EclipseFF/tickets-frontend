@@ -37,7 +37,7 @@ export default function Header() {
 
     }, [])
     return (
-        <header className="flex items-center justify-between gap-4 lg:h-[70px] lg:min-w-[1152px]">
+        <header className="flex items-center justify-between gap-4 lg:h-[70px] lg:min-w-[1152px] pt-2 lg:pt-5">
             <div className="flex items-center">
                 <Image src="/logo.svg" alt="logo" width={99} height={74} />
                 <DropdownMenu>

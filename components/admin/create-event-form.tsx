@@ -22,9 +22,11 @@ import {StarterKit} from "@tiptap/starter-kit";
 import CreateSector from "@/components/admin/create-sector";
 import createEvent from "@/actions/admin/event/create";
 import {EventInterface, EventReq, EventType, Venue} from "@/lib/data";
+import {useRouter} from "next/navigation";
 
 
 export default function CreateEventForm() {
+    const router = useRouter();
 
     function handleEventCreate() {
         setSelectedGenres(selectedGenres.filter(v => selectedGenres.indexOf(v) === selectedGenres.lastIndexOf(v)))
@@ -57,7 +59,8 @@ export default function CreateEventForm() {
         const res = createEvent(temp, text)
         res.then((data) => {
             if (data !== "error") {
-                console.log(data)
+                console.log(data.id)
+                router.push('/admin-panel/events/create/images/' + data.id)
             }
         })
     }

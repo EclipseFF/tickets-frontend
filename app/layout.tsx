@@ -4,7 +4,7 @@ import "./globals.css";
 
 
 
-const manrope = Manrope({subsets: ["latin"]});
+const manrope = Manrope({subsets: ["cyrillic"]});
 
 
 export const metadata: Metadata = {

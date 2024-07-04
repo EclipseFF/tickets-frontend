@@ -19,17 +19,7 @@ import GetVenuesByEvent from "@/actions/venues/get-by-event";
 import Link from "next/link";
 import {extractTime, formatDateToRussian} from "@/lib/utils";
 
-const images = [
-    {
-        original: "https://picsum.photos/id/1018/1000/600/",
-    },
-    {
-        original: "https://picsum.photos/id/1015/1000/600/",
-    },
-    {
-        original: "https://picsum.photos/id/1019/1000/600/",
-    },
-];
+
 
 export default function Page({ params }: { params: { id: string } }) {
     const id = parseInt(params.id)
@@ -40,7 +30,7 @@ export default function Page({ params }: { params: { id: string } }) {
     const [image, setImage] = useState<EventImages>()
     const [venues, setVenues] = useState<Venue[]>([])
     const [isLoaded, setIsLoaded] = useState(false)
-
+    const [images, setImages] = useState<any[]>([])
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -60,6 +50,14 @@ export default function Page({ params }: { params: { id: string } }) {
         })
         getEventImages(id).then(res => {
             setImage(res)
+            res.posters.forEach((img:string) => {
+                const temp = {original: `${url}/api/v1/static/${id}/${img}`}
+                console.log(temp)
+                setImages([...images, temp])
+            })
+        })
+        GetVenuesByEvent(id).then(res => {
+            setVenues(res)
         })
 
     }, [id])
@@ -183,9 +181,9 @@ export default function Page({ params }: { params: { id: string } }) {
             </div>
 
             {image?.posters && (
-                <div className="pt-7 p-3 w-4/5">
+                <div className="pt-7 p-3 w-4/5 max-w-[1152px]">
                     <h1 className="text-2xl font-semibold">
-                        Постеры
+                        Галерея
                     </h1>
                     <ImageGallery items={images} lazyLoad={false} />
                 </div>
