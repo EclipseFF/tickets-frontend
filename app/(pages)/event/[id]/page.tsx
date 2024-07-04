@@ -7,7 +7,7 @@ import {EventImages, EventInterface, Venue} from "@/lib/data";
 import getEventById from "@/actions/event/get-by-id";
 import getEventImages from "@/actions/event/get-images";
 import Image from "next/image";
-import {url} from "@/lib/api";
+import {apiUrl, url} from "@/lib/api";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
 import { useEditor, EditorContent } from '@tiptap/react'
 import {StarterKit} from "@tiptap/starter-kit";
@@ -72,7 +72,7 @@ export default function Page({ params }: { params: { id: string } }) {
                         <CarouselContent>
                             {image?.main_images.map((img) => (
                                 <CarouselItem key={img} className="pl-2">
-                                    <Image src={`${url}/api/v1/static/${id}/${img}`} alt={event?.title || ''}
+                                    <Image src={`${apiUrl}/api/v1/static/${id}/${img}`} alt={event?.title || ''}
                                            width={350}
                                            height={490}
                                            className="p-1"
