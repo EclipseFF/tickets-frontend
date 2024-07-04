@@ -14,6 +14,12 @@ const nextConfig = {
                 port: '4000',
                 pathname: '/api/v1/static/**',
             },
+            {
+                protocol: 'http',
+                hostname: '172.17.0.2',
+                port: '4000',
+                pathname: '/api/v1/static/**',
+            },
 
             {
                 protocol: 'https',
