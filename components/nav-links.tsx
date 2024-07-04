@@ -32,7 +32,7 @@ export default function NavLinks() {
                         </Link>
                     </CarouselItem>
 
-                        {eventTypes.map((link) => (
+                        {eventTypes && eventTypes.map((link) => (
                             link.name && link.translatedName ?
                                 <CarouselItem key={link.name} className="basis-[1/7]">
                                     <Link href={link.translatedName}>

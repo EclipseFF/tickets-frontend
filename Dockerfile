@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package*.json .
 
-CMD ["npm", "install"]
+RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "build"]
+RUN npm run build
 
 CMD ["npm", "start"]
 
