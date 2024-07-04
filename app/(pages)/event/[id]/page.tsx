@@ -51,7 +51,7 @@ export default function Page({ params }: { params: { id: string } }) {
         getEventImages(id).then(res => {
             setImage(res)
             res.posters.forEach((img:string) => {
-                const temp = {original: `${url}/api/v1/static/${id}/${img}`}
+                const temp = {original: `${apiUrl}/api/v1/static/${id}/${img}`}
                 console.log(temp)
                 setImages([...images, temp])
             })
