@@ -7,7 +7,7 @@ RUN npm install
 FROM base AS builder
 WORKDIR /app
 COPY . .
-RUN ["npm", "run", "build"]
+RUN npm run build
 
 
 FROM base AS production
