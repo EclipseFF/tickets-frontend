@@ -122,7 +122,7 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
                     Добавить дату продажи билетов
                     <Input type="datetime-local" value={dateToCreate.toISOString().substring(0, 16)}
                            onChange={(e) => setDateToCreate(new Date(e.target.value))} className="w-full"></Input>
-                    <Button onClick={() => setDates([...dates, {date: dateToCreate, tickets: 0}])}>
+                    <Button onClick={() => setDates([...dates, {date: dateToCreate, types: []}])}>
                         Добавить дату
                     </Button>
                 </div>
