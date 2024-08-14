@@ -16,22 +16,65 @@ export interface sellDayProps {
     types: TicketType[]
 }
 
+const formatDateToLocalString = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
+const updateSellDay = (
+    dates: sellDayProps[],
+    dateToUpdate: Date,
+    newType: TicketType
+): sellDayProps[] => {
+    return dates.map(dateEntry =>
+        dateEntry.date.getTime() === dateToUpdate.getTime()
+            ? { ...dateEntry, types: [...dateEntry.types, newType] }
+            : dateEntry
+    );
+};
+
+
+const removeTicketType = (
+    dates: sellDayProps[],
+    dateToUpdate: Date,
+    typeIdToRemove: number
+): sellDayProps[] => {
+    return dates.map(dateEntry =>
+        dateEntry.date.getTime() === dateToUpdate.getTime()
+            ? {
+                ...dateEntry,
+                types: dateEntry.types.filter(type => type.id !== typeIdToRemove)
+            }
+            : dateEntry
+    );
+};
+
 export default function CreateWithoutSector({eventId, venueId}: {eventId: number, venueId: number}) {
     const [isActive, setIsActive] = useState(false)
     const [dates, setDates] = useState<sellDayProps[]>([])
     const [dateToCreate, setDateToCreate] = useState<Date>(new Date())
     const [newTypeName, setNewTypeName] = useState<string>("")
     const [newTypePrice, setNewTypePrice] = useState<number>(0)
-    const [changedTypes, setChangedTypes] = useState<TicketType[]>([]);
 
 
     function HandleSave() {
-        SaveEventWithoutShahm(venueId, eventId, dates)
+        /*SaveEventWithoutShahm(venueId, eventId, dates)
             .then(() => {
                 setIsActive(false)
-            })
+            })*/
+
+        console.log(dates)
     }
 
+    function HandleRemoveType(id: number, date: Date) {
+
+        setDates(prevDates => removeTicketType(prevDates, date, id));
+    };
 
     return(
         <div>
@@ -78,18 +121,19 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
                                                     <Button onClick={
                                                         () => {
                                                             const newType: TicketType = {
-                                                                id: changedTypes.length + 1,
+                                                                id: Math.floor(Math.random() * 1000000),
                                                                 name: newTypeName,
                                                                 price: newTypePrice
                                                             }
-                                                            setChangedTypes([...changedTypes, newType]);
+
+                                                            setDates(prevDates => updateSellDay(prevDates, date.date, newType));
                                                         }
                                                     } className="my-2" variant="green">
                                                         Добавить
                                                     </Button>
-                                                    {changedTypes.length > 0 && (
+                                                    {date.types && date.types.length > 0 && (
                                                         <div>
-                                                            {changedTypes.map((type) => (
+                                                            {date.types.map((type) => (
                                                                 <div
                                                                     key={type.id}
                                                                     className="p-2"
@@ -98,9 +142,7 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
                                                                     <p>Стоимость:{type.price}</p>
                                                                     <Input placeholder="Введите количество билетов" type="number" onChange={(e) => type.price = parseInt(e.target.value)}/>
                                                                     <Button variant="destructive" onClick={() => {
-                                                                        const newTypes = [...changedTypes]
-                                                                        newTypes.splice(index, 1)
-                                                                        setChangedTypes(newTypes)
+                                                                        HandleRemoveType(type.id, date.date)
                                                                     }}>Удалить этот тип билета</Button>
                                                                 </div>
                                                             ))}
@@ -120,15 +162,28 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
 
 
                     Добавить дату продажи билетов
-                    <Input type="datetime-local" value={dateToCreate.toISOString().substring(0, 16)}
-                           onChange={(e) => setDateToCreate(new Date(e.target.value))} className="w-full"></Input>
+                    <Input
+                        type="datetime-local"
+                        value={formatDateToLocalString(dateToCreate)}
+                        onChange={(e) => setDateToCreate(new Date(e.target.value))}
+                        className="w-full"
+                    >
+
+                    </Input>
                     <Button onClick={() => setDates([...dates, {date: dateToCreate, types: []}])}>
                         Добавить дату
                     </Button>
                 </div>
 
             )}
-            {isActive && <Button onClick={() => HandleSave}>
+            {isActive &&
+                <Button
+                    onClick={() => HandleSave}
+                    variant="green"
+                    className="w-96 my-2"
+
+                >
+
                 Сохранить
             </Button>}
         </div>
