@@ -15,13 +15,8 @@ export default  function CreateWithSector({eventId, venueId}: {eventId: number, 
         GetVenueById(venueId).then((data) => setVenue(data));
     }, []);
     return (
-        <div>
-            <p>{venue.name}</p>
-            <p>
-                Создать сектора?
-            </p>
-
-            {!createSector && <Button onClick={() => setCreateSector(true)}>Да</Button>}
+        <div className="pt-5">
+            {!createSector && <Button onClick={() => setCreateSector(true)}>Создать сектор</Button>}
             {createSector && <Button onClick={() => setCreateSector(false)} variant="destructive">Удалить сектора</Button>}
             {createSector && (
                 <CreateSector eventId={eventId} venueId={venue.id || 0} />

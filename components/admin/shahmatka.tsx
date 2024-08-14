@@ -1,6 +1,6 @@
 'use client';
 
-import { Venue } from "@/lib/data";
+import {TicketType, Venue} from "@/lib/data";
 import {useEffect, useRef, useState} from "react";
 import GetVenuesByEvent from "@/actions/venues/get-by-event";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
@@ -15,11 +15,7 @@ import Image from "next/image";
 import {Textarea} from "@/components/ui/textarea";
 import {v4} from "uuid";
 
-interface Type {
-    id: number;
-    name: string;
-    price: number;
-}
+
 
 interface Seat {
     num: number;
@@ -28,7 +24,7 @@ interface Seat {
     price: number
     bgColor?: string
     textColor?: string
-    types?: Type[]
+    types?: TicketType[]
 }
 
 interface SelectedSeat {
@@ -75,14 +71,14 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
     const [textColor, setTextColor] = useState<string>("");
     const [reverse, setReverse] = useState<boolean>(false);
     const [countAgain, setCountAgain] = useState<boolean>(false);
-    const [changedTypes, setChangedTypes] = useState<Type[]>([]);
+    const [changedTypes, setChangedTypes] = useState<TicketType[]>([]);
     const [newTypeName, setNewTypeName] = useState<string>("");
     const [newTypePrice, setNewTypePrice] = useState<number>(0);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [selectedSeat, setSelectedSeat] = useState<SelectedSeat>();
     const [draggableItems, setDraggableItems] = useState<DraggableItem[]>([])
     const [draggableItemToCreate, setDraggableItemToCreate] = useState<DraggableItem>({} as DraggableItem);
-    const [selectedType, setSelectedType] = useState<Type>({} as Type);
+    const [selectedType, setSelectedType] = useState<TicketType>({} as TicketType);
     const DraggableItem: React.FC<DraggableItemProps> = ({ dragItem, moveItem, containerRef, tool }) => {
         const [{ isDragging }, drag] = useDrag(() => ({
             type: "item",
@@ -115,7 +111,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
 
         return (
             <div
-                ref={drag}
+                ref={drag as any}
                 style={{
                     opacity: isDragging ? 0.5 : 1,
                     cursor: "move",
@@ -177,7 +173,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
 
         return (
             <div
-                ref={drag}
+                ref={drag as any}
                 className={`absolute w-7 m-1 h-7 rounded border text-center text-clip overflow-hidden`}
                 style={{
                     left: `${seat.left}px`,
@@ -443,7 +439,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
                                             </div>
                                             <p>Цена: {type.price} тг</p>
                                             {selectedType && selectedType.id === type.id ? (
-                                                <Button onClick={() => setSelectedType({} as Type)} variant='secondary'>Отменить</Button>
+                                                <Button onClick={() => setSelectedType({} as TicketType)} variant='secondary'>Отменить</Button>
                                             ) : <Button onClick={() => setSelectedType(type)} variant='default'>Выбрать</Button>}
                                             <Button variant='destructive' onClick={() => setChangedTypes(changedTypes.filter((t) => t.id !== type.id))} className="ml-2">Удалить</Button>
                                         </div>
@@ -466,7 +462,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
                                     </div>
                                     <Button onClick={
                                         () => {
-                                            const newType: Type = {
+                                            const newType: TicketType = {
                                                 id: changedTypes.length + 1,
                                                 name: newTypeName,
                                                 price: newTypePrice

@@ -16,6 +16,10 @@ export default function Navbar() {
             <Link href={'/admin-panel/users'}>
                 <p>Пользователи</p>
             </Link>
+
+            <Link href={'/admin-panel/news'}>
+                <p>Новости</p>
+            </Link>
         </div>
     )
 }

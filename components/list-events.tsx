@@ -12,6 +12,8 @@ import getEventImages from "@/actions/event/get-images";
 
 export default function ListEvents({type}: {type: EventType}) {
     const [events, setEvents] = useState<EventInterface[]>([])
+    console.log(type.translatedName)
+
     useEffect(() => {
         getEventByTypePage(type.translatedName, 1).then((res) => {
             setEvents(res)

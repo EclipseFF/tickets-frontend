@@ -67,3 +67,18 @@ export interface EventImages {
     posters: string[];
     main_images: string[];
 }
+
+export interface News {
+    id: number;
+    name?: string;
+    images?: string[];
+    description?: string;
+    created_at?: Date;
+}
+
+export interface TicketType {
+    id: number;
+    name: string;
+    price: number;
+    amount?: number
+}

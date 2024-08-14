@@ -24,10 +24,12 @@ export function TicketsFormAdmin({eventId}: {eventId: number}) {
                 venues.map((venue) => (
                     <div key={venue.id} className="p-2 border shadow">
                         <p>{venue.name}</p>
-                        <Button variant="green" onClick={() => {
-                            setIsActive(true)
-                            setSelectedId(venue.id || -1)
-                        }}>Параметры локации</Button>
+                        {!isActive && (
+                            <Button variant="green" onClick={() => {
+                                setIsActive(true)
+                                setSelectedId(venue.id || -1)
+                            }}>Параметры локации</Button>
+                        )}
                         {isActive && selectedId === venue.id &&
                             <>
                                 <CreateWithoutSector eventId={eventId} venueId={venue.id} />
