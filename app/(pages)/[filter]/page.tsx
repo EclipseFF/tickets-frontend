@@ -20,22 +20,9 @@ export default function Page({ params }: { params: { filter: string } }) {
     }, []);
     return (
         <div className="lg:w-[1152px]">
-            <h1 className="text-3xl font-bold lg:pt-5 lg:pb-3 lg:pl-3">
+            <h1 className="text-3xl font-bold lg:pt-5 lg:pb-3 pl-3">
                 {eventType?.name}
             </h1>
-            <div className="flex p-1">
-                <div>
-                    <Button variant="green" className="text-white font-extrabold text-lg mx-1">
-                        Сейчас
-                    </Button>
-                    <Button variant="secondary" className="text-primaryText font-extrabold text-lg mx-1">
-                        Скоро
-                    </Button>
-                    <Button variant="secondary" className="text-primaryText font-extrabold text-lg mx-1">
-                        Детям
-                    </Button>
-                </div>
-            </div>
 
             <FilteredContent id={eventType?.id} name={eventType?.name} translatedName={eventType?.translatedName} />
         </div>

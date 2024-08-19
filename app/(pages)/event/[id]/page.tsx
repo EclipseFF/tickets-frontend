@@ -7,7 +7,7 @@ import {EventImages, EventInterface, Venue} from "@/lib/data";
 import getEventById from "@/actions/event/get-by-id";
 import getEventImages from "@/actions/event/get-images";
 import Image from "next/image";
-import {apiUrl, url} from "@/lib/api";
+import {apiUrl} from "@/lib/api";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
 import { useEditor, EditorContent } from '@tiptap/react'
 import {StarterKit} from "@tiptap/starter-kit";
@@ -52,7 +52,6 @@ export default function Page({ params }: { params: { id: string } }) {
             setImage(res)
             res.posters.forEach((img:string) => {
                 const temp = {original: `${apiUrl}/api/v1/static/${id}/${img}`}
-                console.log(temp)
                 setImages([...images, temp])
             })
         })

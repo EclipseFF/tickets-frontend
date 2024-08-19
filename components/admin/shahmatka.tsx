@@ -533,7 +533,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
                 </div>
             </div>
             <div>
-                <Button onClick={() => console.log(seats)}>Сохранить</Button>
+                <Button>Сохранить</Button>
             </div>
             {showPopup && (
                 <div

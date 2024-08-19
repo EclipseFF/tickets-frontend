@@ -6,7 +6,7 @@ import getEventById from "@/actions/event/get-by-id";
 import Image from "next/image";
 import getEventImages from "@/actions/event/get-images";
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
-import {staticUrl, url} from "@/lib/api";
+import {staticUrl} from "@/lib/api";
 
 export default function Event({id}: {id: number}) {
     const [event, setEvent] = useState<EventInterface>()

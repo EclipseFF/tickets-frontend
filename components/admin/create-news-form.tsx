@@ -49,13 +49,11 @@ export default function CreateNewsForm(){
                 body: formData,
             });
 
-            if (response.ok) {
-                router.push("/admin-panel/news"); // Redirect to the news list after creation
-            } else {
-                console.error("Failed to create news");
-            }
+
+            router.push("/admin-panel/news");
+
         } catch (error) {
-            console.error("An error occurred:", error);
+            router.push("/admin-panel/news");
         }
     };
 

@@ -137,7 +137,6 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
                                         const isLink = (document.getElementById('isLink') as HTMLInputElement).checked
                                         const imageHeight = (document.getElementById('imageHeight') as HTMLInputElement).value
                                         const imageWidth = (document.getElementById('imageWidth') as HTMLInputElement).value
-                                        console.log(imageHeight, imageWidth)
                                         const newDecorativeObject: DraggableItemInterface = {
                                             containerRef: containerRef,
                                             isLink: isLink,
@@ -164,7 +163,6 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
                         setItemToCreate(itemToCreate)
                         setDraggableItems([...draggableItems, itemToCreate])
                     }
-                    console.log(itemToCreate)
                 }}>
                     Создать объект
                 </Button>

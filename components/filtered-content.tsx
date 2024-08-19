@@ -1,7 +1,6 @@
 'use client'
 
-import {useEffect, useLayoutEffect, useState} from "react";
-import {url} from "@/lib/api";
+import {useLayoutEffect, useState} from "react";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {EventInterface, EventType} from "@/lib/data";
@@ -23,14 +22,14 @@ export default function FilteredContent({id, name, translatedName}: EventType) {
 
     return (
         <div>
-            <div className="flex pt-2 lg:pt-5 pb-1 lg:pb-5">
+            <div className="grid lg:flex pt-2 lg:pt-5 pb-1 lg:pb-5">
                 <div className="lg:w-1/2 flex">
                     <Image src="/icons/search.svg" alt="Поиск" width={16} height={16} className="relative left-6"/>
                     <input
                         className="bg-[#F5F5F5] w-full p-3 px-6 text-base font-light rounded-2xl focus:outline-primaryGreen focus:caret-primaryGreen"
                         placeholder="Фильмы, кинотеатры, новости"/>
                 </div>
-                <div className="flex gap-1 px-2 items-center">
+                <div className="flex gap-1 px-4 pt-2 items-center">
                     <Button variant={"ghost"} onClick={() => setIsFilterOpened(!isFilterOpened)}>
                         <Image src="/icons/filter.svg" alt="Фильтры" width={28} height={28}/>
                         <p className="text-lg font-extrabold">
@@ -39,8 +38,7 @@ export default function FilteredContent({id, name, translatedName}: EventType) {
                     </Button>
                 </div>
             </div>
-            {isFilterOpened && "1asd"}
-            <div className="grid grid-cols-1 lg:grid-cols-7 mx-auto">
+            <div className="flex gap-4 lg:grid lg:grid-cols-7 mx-auto pl-2">
                 {
                     content && content.length > 0 && typeof content !== "string" &&(
                         content.map((e) => (

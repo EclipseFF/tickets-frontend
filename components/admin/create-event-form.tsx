@@ -55,11 +55,9 @@ export default function CreateEventForm() {
         }
         const text = JSON.stringify(editor?.getJSON())
 
-        console.log(text)
         const res = createEvent(temp, text)
         res.then((data) => {
             if (data !== "error") {
-                console.log(data.id)
                 router.push('/admin-panel/events/create/images/' + data.id)
             }
         })

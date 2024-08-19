@@ -9,10 +9,10 @@ import {useEffect, useState} from "react";
 import getEventByTypePage from "@/actions/event/get-type-page";
 import EventCard from "@/components/event-card";
 import getEventImages from "@/actions/event/get-images";
+import Link from "next/link";
 
 export default function ListEvents({type}: {type: EventType}) {
     const [events, setEvents] = useState<EventInterface[]>([])
-    console.log(type.translatedName)
 
     useEffect(() => {
         getEventByTypePage(type.translatedName, 1).then((res) => {
@@ -22,16 +22,18 @@ export default function ListEvents({type}: {type: EventType}) {
     return (
         <div className="lg:w-[1152px]">
             {events && (
-                <Carousel className="px-2">
+                <Carousel className="px-2 ">
                     <CarouselContent>
                         {events.map((event) => (
                             <CarouselItem key={event.id} className="basis-[1/7]">
-                                <EventCard event={event}/>
+                                <Link href={'/event/' + event.id}>
+                                    <EventCard event={event}/>
+                                </Link>
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious/>
-                    <CarouselNext/>
+                    <CarouselPrevious className="hidden lg:inline-flex"/>
+                    <CarouselNext className="hidden lg:inline-flex"/>
                 </Carousel>
             )}
         </div>

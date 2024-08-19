@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
     return (
         <div className="bg-[#F9F9FA] w-full flex justify-center">
-            <div className="w-4/5 grid grid-cols-4 justify-items-center pb-12 pt-10">
+            <div className="w-4/5 grid grid-cols-2 lg:grid-cols-4 justify-items-center pb-12 pt-10">
                 <Link href="/">
                     <Image src="/logo.svg" alt="Лого" width={165} height={154} />
                 </Link>
@@ -27,7 +27,7 @@ export default function Footer() {
                 </div>
                 <div>
                     <h1 className="font-extrabold pb-4">Социальные сети</h1>
-                    <Link href="https://www.instagram.com">
+                    <Link href="https://www.instagram.com/tap2go_astana/">
                         <Image src="/icons/instagram.svg" alt="Инстаграм" width={24} height={24} />
                     </Link>
                 </div>

@@ -9,7 +9,6 @@ interface UserRegister {
 }
 
 export async function register({email, password, phone}: UserRegister) {
-    console.log(email, password, phone)
     try {
         const res = await fetch(`${url}/api/v1/user/register`, {
             method: "POST",

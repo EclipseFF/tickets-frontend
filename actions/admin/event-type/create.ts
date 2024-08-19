@@ -14,6 +14,5 @@ export default async function createType(name: string) {
         const data = await res.json()
         return data
     } catch (e) {
-        console.log(e)
     }
 }

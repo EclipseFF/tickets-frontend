@@ -3,7 +3,7 @@ import {EventImages, EventInterface} from "@/lib/data";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import getEventImages from "@/actions/event/get-images";
-import {staticUrl, url} from "@/lib/api";
+import {staticUrl} from "@/lib/api";
 
 type Props = {
     event: EventInterface
@@ -19,7 +19,7 @@ export default function EventCard(props: Props) {
 
     return (
         <div className="block w-[147px] h-[350px]">
-            <Link href={'/event/' + props.event.id}>
+
             {(props.event.rating && props.event.rating > -1 ) ? (
                 <div className="bg-primaryGreen flex items-center rounded-r-full relative top-[19%] w-12 h-[22px]">
                     <Image src="/icons/rating.svg" alt="Рейтинг" width={12} height={12}/>
@@ -63,7 +63,6 @@ export default function EventCard(props: Props) {
                 {props.event.genres.join(", ")}
             </p>)
             }
-            </Link>
         </div>
     )
 }

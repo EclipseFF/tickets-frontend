@@ -3,7 +3,7 @@ import {Card, CardContent} from "@/components/ui/card";
 import {useEffect, useState} from "react";
 import getEventImages from "@/actions/event/get-images";
 import Image from "next/image";
-import {staticUrl, url} from "@/lib/api";
+import {staticUrl} from "@/lib/api";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {EventImages, EventInterface} from "@/lib/data";

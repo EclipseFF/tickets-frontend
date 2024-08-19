@@ -4,7 +4,7 @@ import {useState} from "react";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import UploadImages from "@/actions/admin/event/upload-images";
-import {apiUrl, staticUrl, url} from "@/lib/api";
+import {apiUrl} from "@/lib/api";
 import {useRouter} from "next/navigation";
 
 export default function UploadImagesForm({id}: { id: number }) {

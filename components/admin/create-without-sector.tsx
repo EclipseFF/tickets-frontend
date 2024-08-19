@@ -63,12 +63,6 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
 
 
     function HandleSave() {
-        /*SaveEventWithoutShahm(venueId, eventId, dates)
-            .then(() => {
-                setIsActive(false)
-            })*/
-
-        console.log(dates)
     }
 
     function HandleRemoveType(id: number, date: Date) {

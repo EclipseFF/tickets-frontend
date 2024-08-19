@@ -31,7 +31,6 @@ export default function Page({ params }: { params: { id: string } }) {
                     router.push('/admin-panel/events');
                 }
             } catch (error) {
-                console.error('Failed to fetch event:', error);
                 router.push('/admin-panel/events');
             }
         };

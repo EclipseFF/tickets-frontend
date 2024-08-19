@@ -12,6 +12,5 @@ export default async function UploadImages(images: FormData) {
         const data = await res.json()
         return data
     } catch (e) {
-        console.log(e)
     }
 }

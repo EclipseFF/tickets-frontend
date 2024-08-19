@@ -6,7 +6,6 @@ type Props = {
 }
 
 export default function SeatTypePopup(name: string, price: number) {
-    console.log(name, price)
     return (
         <div className="w-96 h-72 bg-red-600">
             <p>{name}</p>

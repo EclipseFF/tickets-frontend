@@ -21,7 +21,6 @@ export async function login(email: string, password: string) {
             case "internal server error":
                 return "error"
         }
-        console.log(data)
         cookies().set("session", data.token, {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)})
         return "success"
     } catch (e) {

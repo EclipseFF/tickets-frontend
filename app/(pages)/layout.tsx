@@ -1,4 +1,4 @@
-import Header from "@/components/header";
+import LargeHeader, {MobileHeader} from "@/components/largeHeader";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -7,10 +7,15 @@ export default function Layout({children}: {
 }) {
     return (
         <main>
-            <Header />
-            <Navbar />
-                {children}
-            <Footer />
+            <div className="hidden lg:block">
+                <LargeHeader/>
+            </div>
+            <div className="block lg:hidden">
+                <MobileHeader/>
+            </div>
+            <Navbar/>
+            {children}
+            <Footer/>
         </main>
     )
 }
