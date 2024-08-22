@@ -71,7 +71,7 @@ export default function UploadImagesForm({id}: { id: number }) {
             <div className="flex flex-col items-center">
                 <label className="cursor-pointer">
                     <div className="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-md text-center">
-                        <p className="text-gray-500">Нажмите, чтобы загрузить ищображения</p>
+                        <p className="text-gray-500">Нажмите, чтобы загрузить постеры</p>
                         <input
                             type="file"
                             accept="image/*"
@@ -85,7 +85,7 @@ export default function UploadImagesForm({id}: { id: number }) {
 
             {mainImages.length > 0 && (
                 <div className="mt-4">
-                    <h3 className="text-lg font-semibold mb-2">Предпросмотр</h3>
+                    <h3 className="text-lg font-semibold mb-2">Предпросмотр постеров</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {mainImages.map((image, index) => (
                             <div key={index} className="relative group">
@@ -109,10 +109,10 @@ export default function UploadImagesForm({id}: { id: number }) {
                 </div>
             )}
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center pt-10">
                 <label className="cursor-pointer">
                     <div className="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-md text-center">
-                        <p className="text-gray-500">Загрузите постеры</p>
+                        <p className="text-gray-500">Нажмите, чтобы загрузить изображения в галерею</p>
                         <input
                             type="file"
                             accept="image/*"
@@ -126,7 +126,7 @@ export default function UploadImagesForm({id}: { id: number }) {
 
             {posters.length > 0 && (
                 <div className="mt-4">
-                    <h3 className="text-lg font-semibold mb-2">Предпросмотр постеров</h3>
+                    <h3 className="text-lg font-semibold mb-2">Предпросмотр галереии</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {posters.map((image, index) => (
                             <div key={index} className="relative group">
@@ -152,7 +152,7 @@ export default function UploadImagesForm({id}: { id: number }) {
 
 
 
-            <div className="flex justify-between">
+            <div className="flex justify-between pt-5">
                 <Button variant='green' onClick={() => handlerServerUpload()}>
                     Загрузить
                 </Button>

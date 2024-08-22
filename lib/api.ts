@@ -1,5 +1,5 @@
-//export const url = "http://localhost:4000"
-export const url = "http://172.17.0.2:4000"
+export const url = "http://localhost:4000"
+//export const url = "http://172.17.0.2:4000"
 
 //export const apiUrl = "http://localhost:4000";
 export const apiUrl = "https://api.tap2go.kz";

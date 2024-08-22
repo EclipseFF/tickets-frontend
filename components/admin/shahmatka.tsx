@@ -14,17 +14,21 @@ import SeatTypePopup from "@/components/seat-type-popup";
 import Image from "next/image";
 import {Textarea} from "@/components/ui/textarea";
 import {v4} from "uuid";
+import SaveWthShah from "@/actions/admin/event/save-wth-shah";
+import {apiUrl, url} from "@/lib/api";
 
 
 
-interface Seat {
+export interface Seat {
+    id?: number;
     num: number;
     left: number;
     top: number;
-    price: number
+    price?: number
     bgColor?: string
     textColor?: string
     types?: TicketType[]
+    date?: Date
 }
 
 interface SelectedSeat {
@@ -49,6 +53,7 @@ interface DraggableItem {
     uuid: string;
     left: number;
     top: number;
+    filename?: string;
 }
 
 interface DraggableItemProps {
@@ -59,7 +64,7 @@ interface DraggableItemProps {
 }
 
 
-export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: number, venueId: number, sectorUUID: string }) {
+export default function Shahmatka({ eventId, venueId, sectorId }: { eventId: number, venueId: number, sectorId: number }) {
     const [seats, setSeats] = useState<Seat[][]>([[]]);
     const containerRef = useRef<HTMLDivElement>(null);
     const [x, setX] = useState(10);
@@ -79,6 +84,8 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
     const [draggableItems, setDraggableItems] = useState<DraggableItem[]>([])
     const [draggableItemToCreate, setDraggableItemToCreate] = useState<DraggableItem>({} as DraggableItem);
     const [selectedType, setSelectedType] = useState<TicketType>({} as TicketType);
+    const [images, setImages] = useState<File[]>([]);
+
     const DraggableItem: React.FC<DraggableItemProps> = ({ dragItem, moveItem, containerRef, tool }) => {
         const [{ isDragging }, drag] = useDrag(() => ({
             type: "item",
@@ -270,6 +277,22 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
         });
     };
 
+    function handleSave() {
+        SaveWthShah(venueId, eventId, seats)
+        let formdata = new FormData();
+        formdata.append("venueId", venueId.toString());
+        draggableItems.forEach((item) => {
+            formdata.append("items", JSON.stringify(item));
+        })
+        images.forEach((image) => {
+            formdata.append("images", image);
+        })
+        fetch(apiUrl + `/api/v1/event/tickets-shah/decor`, {
+            method: 'POST',
+            body: formdata
+          })
+    }
+
     return (
         <DndProvider backend={HTML5Backend}>
             <div className="pb-4 border my-3 p-1">
@@ -368,7 +391,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
 
                         <Dialog>
                             <DialogTrigger className="mx-2 bg-black text-white h-10 px-4 py-2 rounded-md">
-                                Параметра декоративного объекта
+                                Параметры декоративного объекта
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
@@ -387,8 +410,10 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
                                                     image: file ? URL.createObjectURL(file) : '',
                                                     uuid: v4(),
                                                     left: 0,
-                                                    top: 0
+                                                    top: 0,
+                                                    filename: file?.name
                                                 }
+                                                file && setImages([...images, file])
                                                 setDraggableItemToCreate(newDecorativeObject)
                                             }}
                                         >Применить</Button>
@@ -418,7 +443,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
 
                             <div>
                                 <h1 className="m-2 text-lg">
-                                    Изменить типы мест: добавитьразделение на детские и взрослые, добавить вип-места и т.д.
+                                    Изменить типы мест: добавить разделение на детские и взрослые, добавить вип-места и т.д.
                                 </h1>
                                 {changedTypes && changedTypes.length > 0 && (
                                     changedTypes.map((type) => (
@@ -533,7 +558,7 @@ export default function Shahmatka({ eventId, venueId, sectorUUID }: { eventId: n
                 </div>
             </div>
             <div>
-                <Button>Сохранить</Button>
+                <Button onClick={() => handleSave()}>Сохранить</Button>
             </div>
             {showPopup && (
                 <div
@@ -583,6 +608,9 @@ function InitialCreate(rows: number, cols: number, price: number, countAgain: bo
     const seatMargin = 4;
     const topPadding = 200;
     let counter = 1;
+    const defaultType: TicketType = {
+        id: 0,     name: 'Базовый',     price: price,     amount: 1
+    }
     if (reverse) {
         for (let i = rows - 1; i >= 0; i--) {
             const row: Seat[] = [];
@@ -591,7 +619,7 @@ function InitialCreate(rows: number, cols: number, price: number, countAgain: bo
                     num: counter++,
                     left: j * (seatWidth + 2 * seatMargin),
                     top: i * (seatHeight + 2 * seatMargin) + topPadding,
-                    price: price
+                    types: [defaultType],
                 };
                 row.push(seat);
             }
@@ -608,7 +636,7 @@ function InitialCreate(rows: number, cols: number, price: number, countAgain: bo
                     num: counter++,
                     left: j * (seatWidth + 2 * seatMargin),
                     top: i * (seatHeight + 2 * seatMargin) + topPadding,
-                    price: price
+                    types: [defaultType],
                 };
                 row.push(seat);
             }

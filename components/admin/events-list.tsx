@@ -20,7 +20,7 @@ export default function EventsList({page = 0}: Props) {
     return (
         <div className="border p-4">
             {events && events.map((event) => (
-                <div key={event.id}>
+                <div key={event.id} className="mb-4 p-6" >
                     <EventCardExpanded Event={event} />
                 </div>
             ))}

@@ -19,6 +19,9 @@ import {undefined} from "zod";
 import {number, string} from "yup";
 import Image from "next/image";
 import Shahmatka from "@/components/admin/shahmatka";
+import {apiUrl, url} from "@/lib/api";
+import {images} from "next/dist/build/webpack/config/blocks/images";
+import {Sector} from "@/lib/data";
 
 interface DraggableItemInterface {
     image?: string;
@@ -33,6 +36,7 @@ interface DraggableItemInterface {
     moveItem: (newLeft: number, newTop: number, uuid: string) => void;
     containerRef: React.RefObject<HTMLDivElement>;
     tool?: string;
+    filename?: string;
 }
 
 
@@ -96,6 +100,9 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
     const [itemToCreate, setItemToCreate] = useState<DraggableItemInterface>({} as DraggableItemInterface);
     const [tool, setTool] = useState("view");
     const [isActive, setIsActive] = useState(false);
+    const [files, setFiles] = useState<File[]>([]);
+    const [sectors, setSectors] = useState<Sector[]>([]);
+
     const moveItem = (newLeft: number, newTop: number, uuid: string) => {
         setDraggableItems((prevItems) => {
             const newItems = prevItems.map(item => {
@@ -107,6 +114,44 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
             return newItems;
         });
     };
+
+    function handlerSectorSave() {
+        setIsActive(true);
+        let formData = new FormData();
+        formData.append("eventId", eventId.toString());
+        formData.append("venueId", venueId.toString());
+
+        draggableItems.forEach((item, index) => {
+            const temp = {
+                name: item.name,
+                description: item.description,
+                height: item.height,
+                width: item.width,
+                isLink: item.isLink,
+                left: item.left,
+                top: item.top,
+                uuid: item.uuid,
+                image: item.filename
+            };
+            formData.append(`sectors`, JSON.stringify(temp));
+        });
+
+        if (files.length > 0) {
+            files.forEach((file, index) => {
+                formData.append(`images`, file);
+            });
+        }
+        console.log(draggableItems)
+
+        fetch(apiUrl + '/api/v1/sector', {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json()).then(data => {
+            if (data.Sectors && data.Sectors.length > 0) {
+                setSectors(data.Sectors);
+            }
+        })
+    }
 
     return (
         <div>
@@ -137,6 +182,7 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
                                         const isLink = (document.getElementById('isLink') as HTMLInputElement).checked
                                         const imageHeight = (document.getElementById('imageHeight') as HTMLInputElement).value
                                         const imageWidth = (document.getElementById('imageWidth') as HTMLInputElement).value
+                                        const uuid = v4()
                                         const newDecorativeObject: DraggableItemInterface = {
                                             containerRef: containerRef,
                                             isLink: isLink,
@@ -145,10 +191,12 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
                                             image: file ? URL.createObjectURL(file) : '',
                                             height: Number(imageHeight),
                                             width: Number(imageWidth),
-                                            uuid: v4(),
+                                            uuid: uuid,
                                             left: 0,
-                                            top: 0
+                                            top: 0,
+                                            filename: file?.name
                                         }
+                                        file && setFiles([...files, file])
                                         setItemToCreate(newDecorativeObject)
                                     }}
                                 >Применить</Button>
@@ -204,13 +252,13 @@ export default function CreateSector({eventId, venueId}: {eventId: number, venue
                     </div>
                 </div>
             </DndProvider>
-            <Button variant="green" className="my-2" onClick={() => setIsActive(true)}>
+            <Button variant="green" className="my-2" onClick={() => handlerSectorSave()}>
                 Сохранить
             </Button>
             {isActive &&
-                draggableItems.map((item) => (
+                sectors.map((item) => (
                     item.isLink ? (
-                        <Shahmatka eventId={eventId} venueId={venueId} sectorUUID={item.uuid} key={item.uuid}/>
+                        <Shahmatka eventId={eventId} venueId={venueId} sectorId={item.id} key={item.id}/>
                     ) : null
                 ))
             }

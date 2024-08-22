@@ -27,6 +27,13 @@ const nextConfig = {
                 port: '4000',
                 pathname: '/api/v1/static/**',
             },
+
+            {
+                protocol: 'https',
+                hostname: 'api.tap2go.kz',
+                port: '',
+                pathname: '/**',
+            },
         ],
     }
 };

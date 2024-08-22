@@ -19,7 +19,7 @@ export function TicketsFormAdmin({eventId}: {eventId: number}) {
 
 
     return (
-        <div>
+        <div className="p-4">
             {venues.length > 0 && (
                 venues.map((venue) => (
                     <div key={venue.id} className="p-2 border shadow">

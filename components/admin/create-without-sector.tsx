@@ -63,6 +63,7 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
 
 
     function HandleSave() {
+        SaveEventWithoutShahm(venueId, eventId, dates)
     }
 
     function HandleRemoveType(id: number, date: Date) {
@@ -132,10 +133,18 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
                                                                     key={type.id}
                                                                     className="p-2"
                                                                 >
-                                                                    <p>Название: {type.name}</p>
-                                                                    <p>Стоимость:{type.price}</p>
-                                                                    <Input placeholder="Введите количество билетов" type="number" onChange={(e) => type.price = parseInt(e.target.value)}/>
-                                                                    <Button variant="destructive" onClick={() => {
+                                                                    <p>Название:
+                                                                        <span className="font-semibold">
+                                                                            {" " + type.name}
+                                                                        </span>
+                                                                    </p>
+                                                                    <p>Стоимость:
+                                                                        <span className="font-semibold">
+                                                                            {" " + type.price}
+                                                                        </span>
+                                                                    </p>
+                                                                    <Input placeholder="Введите количество билетов" type="number" onChange={(e) => type.amount = parseInt(e.target.value)}/>
+                                                                    <Button className="mt-2" variant="destructive" onClick={() => {
                                                                         HandleRemoveType(type.id, date.date)
                                                                     }}>Удалить этот тип билета</Button>
                                                                 </div>
@@ -155,7 +164,11 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
                                 )}
 
 
-                    Добавить дату продажи билетов
+                    {dates.length > 0 && (
+                        <h1>
+                            Добавить дату продажи билетов
+                        </h1>
+                    )}
                     <Input
                         type="datetime-local"
                         value={formatDateToLocalString(dateToCreate)}
@@ -172,12 +185,10 @@ export default function CreateWithoutSector({eventId, venueId}: {eventId: number
             )}
             {isActive &&
                 <Button
-                    onClick={() => HandleSave}
+                    onClick={() => HandleSave()}
                     variant="green"
                     className="w-96 my-2"
-
                 >
-
                 Сохранить
             </Button>}
         </div>

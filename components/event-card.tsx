@@ -18,7 +18,7 @@ export default function EventCard(props: Props) {
     }, [])
 
     return (
-        <div className="block w-[147px] h-[350px]">
+        <div className="block w-[150px] h-[350px]">
 
             {(props.event.rating && props.event.rating > -1 ) ? (
                 <div className="bg-primaryGreen flex items-center rounded-r-full relative top-[19%] w-12 h-[22px]">

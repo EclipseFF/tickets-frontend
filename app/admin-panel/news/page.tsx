@@ -8,7 +8,7 @@ import NewsList from "@/components/admin/news-list";
 export default async function Page() {
 
     return(
-        <div>
+        <div className="min-h-screen bg-gray-100">
             <h1 className="text-3xl font-bold text-gray-800 p-6">Админ панель</h1>
             <div className="grid grid-cols-10 gap-4 p-6">
                 <div className="col-span-2">

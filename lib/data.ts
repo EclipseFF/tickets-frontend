@@ -82,3 +82,32 @@ export interface TicketType {
     price: number;
     amount?: number
 }
+
+export interface TicketTypeForClient {
+    id: number;
+    event_day_id: number;
+    name: string;
+    price: number;
+    amount: number;
+    sold_count: number;
+    version: number;
+}
+
+export interface EventDay {
+    id: number;
+    event_id: number;
+    date: string;
+    types: TicketTypeForClient[];
+}
+
+export interface Sector {
+    id: number;
+    venueId: number;
+    name?: string;
+    height?: number;
+    width?: number;
+    isLink: boolean;
+    left?: number;
+    top?: number;
+    image?: string;
+}

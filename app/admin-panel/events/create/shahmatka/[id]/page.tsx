@@ -8,7 +8,7 @@ export default function Page({ params }: { params: { id: string } }) {
     }
 
     return (
-        <div>
+        <div className="bg-gray-100 min-h-screen pt-20 min-w-[1000px]">
             <TicketsFormAdmin eventId={id} />
         </div>
     )

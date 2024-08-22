@@ -7,8 +7,10 @@ export default function Page({ params }: { params: { id: string } }) {
         redirect('/admin-panel/events');
     }
     return (
-        <div>
-            <h1>Images</h1>
+        <div className="flex flex-col gap-4 pt-20 items-center">
+            <h1>Загрузить изображения.</h1>
+            <h1 className="font-semibold">Внимание, для постеров необходимо загружать изображения размером 150 на 350 пикселей.</h1>
+            <h1 className="font-semibold">Для изображений галереии ограничений нет </h1>
             <UploadImagesForm id={id} />
         </div>
     )
