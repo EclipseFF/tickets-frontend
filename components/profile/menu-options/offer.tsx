@@ -1,5 +1,7 @@
 export default function Offer() {
     return (
-        <Offer />
+        <div>
+            <object data="/docs/tap2go-offer.pdf" type="application/pdf" width="100%" height="1000px"></object>
+        </div>
     )
 }
