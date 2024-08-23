@@ -57,8 +57,8 @@ export default function Profile() {
                 {option === 'support' && <Support/>}
                 {option === 'qa' && <QAndA/>}
                 {option === 'offer' && (
-                    <div>
-                        <Link href={'/oferta'}>Оферта</Link>
+                    <div className="p-2">
+                        <Link className="underline font-semibold" href={'/oferta'}>Публичный договор (оферта)</Link>
                     </div>)
                 }
             </div>

@@ -7,6 +7,7 @@ import {Button} from "@/components/ui/button";
 import {register} from "@/actions/auth/register";
 import {useRouter} from "next/navigation";
 import {red} from "next/dist/lib/picocolors";
+import Link from "next/link";
 
 const formSchema = z.object({
     email: z.string().min(2, {message: "Введите крректную почту"}),
@@ -99,6 +100,9 @@ export default function RegisterForm() {
                             )}
                         />
                         <Button type="submit" className="w-full">Зарегестрироваться</Button>
+                        <div>
+                            <p>Нажимая &ldquo;Зарегестрироваться&rdquo;, вы соглашаетесть с <Link className="font-semibold underline" href={'/conf'}>договором конфиденциальности</Link></p>
+                        </div>
                     </form>
                 </Form>
             </div>

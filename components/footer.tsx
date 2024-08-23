@@ -16,6 +16,10 @@ export default function Footer() {
                     <Link href="/oferta">
                         <p className="font-normal">Публичный договор (оферта)</p>
                     </Link>
+
+                    <Link href="/conf">
+                        <p className="font-normal">Договор конфиденциальности</p>
+                    </Link>
                     <p className="font-normal">Реклама</p>
                 </div>
                 <div className="grid gap-4">
