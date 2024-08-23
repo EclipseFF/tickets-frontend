@@ -14,6 +14,7 @@ import getUserBySession from "@/actions/user/get-by-session";
 import logout from "@/actions/auth/logout";
 import getAdditionalData from "@/actions/user/get-additional-data";
 import {AdditionalUserData, User} from "@/lib/data";
+import Link from "next/link";
 
 export default function Profile() {
     const searchParams = useSearchParams()
@@ -55,7 +56,11 @@ export default function Profile() {
                 {option === 'return' && <TicketsReturn/>}
                 {option === 'support' && <Support/>}
                 {option === 'qa' && <QAndA/>}
-                {option === 'offer' && <Offer/>}
+                {option === 'offer' && (
+                    <div>
+                        <Link href={'/oferta'}>Оферта</Link>
+                    </div>)
+                }
             </div>
         </div>
     )
