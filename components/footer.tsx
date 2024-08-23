@@ -13,7 +13,9 @@ export default function Footer() {
                     <p className="font-normal">Правила возврата билета</p>
                     <p className="font-normal">Мы на связи</p>
                     <p className="font-normal">F.A.Q.</p>
-                    <p className="font-normal">Публичный договор (оферта)</p>
+                    <Link href="/oferta">
+                        <p className="font-normal">Публичный договор (оферта)</p>
+                    </Link>
                     <p className="font-normal">Реклама</p>
                 </div>
                 <div className="grid gap-4">
