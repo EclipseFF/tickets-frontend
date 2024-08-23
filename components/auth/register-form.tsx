@@ -101,7 +101,9 @@ export default function RegisterForm() {
                         />
                         <Button type="submit" className="w-full">Зарегестрироваться</Button>
                         <div>
-                            <p>Нажимая &ldquo;Зарегестрироваться&rdquo;, вы соглашаетесть с <Link className="font-semibold underline" href={'/conf'}>договором конфиденциальности</Link></p>
+                            <p>Нажимая &ldquo;Зарегестрироваться&rdquo;, вы соглашаетесть с <Link className="font-semibold underline" href={'/conf'}>договором конфиденциальности </Link>
+                                и <Link className="font-semibold underline" href={'/oferta'}>публичным договором (офертой)</Link>
+                            </p>
                         </div>
                     </form>
                 </Form>
